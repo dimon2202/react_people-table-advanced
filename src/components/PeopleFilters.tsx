@@ -1,18 +1,48 @@
+import classNames from 'classnames';
+import { Link, useSearchParams } from 'react-router-dom';
+
+enum Sex {
+  All = '',
+  Male = 'm',
+  Female = 'f',
+}
+
 export const PeopleFilters = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  // const { pathname } = useLocation();
+
+  const sex = searchParams.get('sex') || Sex.All;
+  const query = searchParams.get('query') || '';
+  // const centuries = searchParams.getAll('centuries') || [];
+
+  const handleSexChange = (s: Sex) => () => {
+    const params = new URLSearchParams(searchParams);
+
+    params.set('sex', s);
+    setSearchParams(params);
+  };
+
   return (
     <nav className="panel">
       <p className="panel-heading">Filters</p>
 
+      <span>{sex}</span>
+
       <p className="panel-tabs" data-cy="SexFilter">
-        <a className="is-active" href="#/people">
-          All
-        </a>
-        <a className="" href="#/people?sex=m">
-          Male
-        </a>
-        <a className="" href="#/people?sex=f">
-          Female
-        </a>
+        {Object.keys(Sex).map(x => (
+          <Link
+            className={classNames([
+              {
+                'is-active': x === searchParams.get('sex'),
+              },
+            ])}
+            to={{ pathname: '/people', search: searchParams.toString() }}
+            key={x}
+            onClick={handleSexChange(x as Sex)}
+          >
+            {x}
+          </Link>
+        ))}
       </p>
 
       <div className="panel-block">
