@@ -20,7 +20,7 @@ export const Navbar = () => {
                 'has-background-grey-lighter': pathname === '/',
               },
             ])}
-            to="/"
+            to={{ pathname: '/', search: '' }}
           >
             Home
           </Link>

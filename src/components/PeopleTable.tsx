@@ -21,8 +21,6 @@ export const PeopleTable = ({ people }: Props) => {
   const currentSort = searchParams.get('sort') || '';
   const currentOrder = searchParams.get('order') || '';
 
-  // console.log
-
   const findPersonSlug = (name: string | null) => {
     return people.find(p => p.name === name)?.slug || null;
   };

@@ -80,8 +80,6 @@ export const PeoplePage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [searchParams] = useSearchParams();
 
-  // console.log(searchParams.keys());
-
   useEffect(() => {
     setLoaderPeople(true);
     setErrorMessage('');

@@ -10,8 +10,6 @@ export enum Sex {
 
 export const PeopleFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  // const { search } = useLocation();
-
   const sex = searchParams.get('sex') || Sex.All;
   const query = searchParams.get('query') || '';
   const centuries = searchParams.getAll('centuries') || [];
@@ -19,10 +17,6 @@ export const PeopleFilters = () => {
   return (
     <nav className="panel">
       <p className="panel-heading">Filters</p>
-
-      <span>
-        {sex} - {query} - {centuries.toString()}
-      </span>
 
       <p className="panel-tabs" data-cy="SexFilter">
         {Object.entries(Sex).map(([key, value]) => (
